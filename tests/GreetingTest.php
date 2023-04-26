@@ -1,6 +1,6 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit/Framework/TestCase;
 include_once(dirname(__FILE__) . '/../Greeting.php');
 
 class GreetingTest extends TestCase{

@@ -2,7 +2,8 @@
 
 class Greeting {
 
-    function getGreeting($name) {
+    function getGreeting($name): string
+    {
         return "Hello, " . $name . "!";
     }
 
