@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-include './Greeting.php';
+include_once(dirname(__FILE__) . '/../Greeting.php');
 
 class GreetingTest extends TestCase{
 
