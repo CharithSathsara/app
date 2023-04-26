@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-include 'Greeting.php';
+include './Greeting.php';
 
 class GreetingTest extends TestCase{
 
