@@ -9,7 +9,7 @@ class GreetingTest extends TestCase{
 
         $greeting = new Greeting();
 
-        $this->assertEquals('Hello, John!', $greeting->getGreeting('Charith'));
+        $this->assertEquals('Hello, John!', $greeting->getGreeting('John'));
         $this->assertEquals('Hello, Jane!', $greeting->getGreeting('Jane'));
     }
 }
