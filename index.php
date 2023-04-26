@@ -8,7 +8,7 @@
 <h1>Greeting Example</h1>
 <p>
     <?php
-    require_once '/Greeting.php';
+    require_once 'Greeting.php';
 
     $greeting = new Greeting();
     $str = $greeting->getGreeting("John");
