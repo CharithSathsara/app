@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>Greeting Example</h1>
+<h1>Greeting Example By Charith</h1>
 <p>
     <?php
     require_once 'Greeting.php';
