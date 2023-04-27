@@ -25,4 +25,4 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
         with:
-          args: rsync -azv -e "ssh -p 22 -i ${{ secrets.EC2_SSH_KEY_NAME }} -o StrictHostKeyChecking=no" --exclude-from='.rsyncignore' --delete $GITHUB_WORKSPACE/ ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
+          args: rsync -azv -e "ssh -p 22 -i ${{ secrets.EC2_SSH_KEY_NAME }} -o StrictHostKeyChecking=no" --exclude-from='.rsyncignore' --delete $GITHUB_WORKSPACE/ ubuntu@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}/app/
