@@ -19,9 +19,9 @@ jobs:
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: /var/www/html  # update this line
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: /var/www/html/  # update this line
         with:
-          args: rsync -azv -e "ssh -p 22 -i "app_key_pair.pem" ubuntu@ec2-18-136-196-164.ap-southeast-1.compute.amazonaws.com -o StrictHostKeyChecking=no" --exclude-from='.rsyncignore' --delete $GITHUB_WORKSPACE/ ubuntu@18.136.196.164:/var/www/html
+          args: rsync -azv -e "ssh -p 22 -i app_key_pair.pem -o StrictHostKeyChecking=no" --exclude-from='.rsyncignore' --delete $GITHUB_WORKSPACE/ ubuntu@$18.136.196.164:/var/www/html/
