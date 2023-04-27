@@ -16,7 +16,13 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
+      - name: Setup SSH connection
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
       - name: Deploy code
         run: |
+          ssh-keyscan 18.136.196.164 >> ~/.ssh/known_hosts
           rsync -avz --delete --exclude-from='.rsyncignore' ./ ubuntu@18.136.196.164:/var/www/html/
           ssh ubuntu@18.136.196.164 'cd /var/www/html && composer install'
