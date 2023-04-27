@@ -24,5 +24,5 @@ jobs:
       - name: Deploy code
         run: |
           ssh-keyscan 18.136.196.164 >> ~/.ssh/known_hosts
-          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@18.136.196.164:/var/www/html/
-          ssh ubuntu@18.136.196.164 'cd /var/www/html && composer install'
+          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@18.136.196.164:/var/www/html/app/
+          ssh ubuntu@18.136.196.164 'cd /var/www/html/app/ && composer install'

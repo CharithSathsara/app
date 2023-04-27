@@ -3,3 +3,6 @@
 .phpunit.result.cache
 .php_cs.cache
 composer.lock
+.git
+.github
+.idea
