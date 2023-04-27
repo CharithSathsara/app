@@ -8,7 +8,6 @@ on:
 jobs:
 
 
-
   deploy:
     name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
@@ -23,6 +22,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+          TARGET: /var/www/html  # update this line
         with:
-          args: rsync -azv -e "ssh -p 22 -i app_key_pair.pem -o StrictHostKeyChecking=no" --exclude-from='.rsyncignore' --delete $GITHUB_WORKSPACE/ ubuntu@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
+          args: rsync -azv -e "ssh -p 22 -i "app_key_pair.pem" ubuntu@ec2-18-136-196-164.ap-southeast-1.compute.amazonaws.com -o StrictHostKeyChecking=no" --exclude-from='.rsyncignore' --delete $GITHUB_WORKSPACE/ ubuntu@18.136.196.164:/var/www/html
