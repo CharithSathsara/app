@@ -16,12 +16,7 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.0.0
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-          ssh-username: ubuntu
-          remote-port: 22
-          remote-host: 18.136.196.164
-          source: ./
-          destination: /var/www/html/
+      - name: Deploy code
+        run: |
+          rsync -avz --delete --exclude-from='.rsyncignore' ./ ubuntu@18.136.196.164:/var/www/html/
+          ssh ubuntu@18.136.196.164 'cd /var/www/html && composer install'
