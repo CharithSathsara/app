@@ -23,5 +23,5 @@ jobs:
 
       - name: Deploy code
         run: |
-          ssh-keyscan 18.136.196.164 >> ~/.ssh/known_hosts
-          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@18.136.196.164:/var/www/html/app/
+          ssh-keyscan ${{ secrets.HOST_DNS }} >> ~/.ssh/known_hosts
+          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:${{ secrets.TARGET_DIR }}
