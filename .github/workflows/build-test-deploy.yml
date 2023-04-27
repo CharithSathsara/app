@@ -16,12 +16,12 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: /var/www/html/  # update this line
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.0.0
         with:
-          args: rsync -azv -e "ssh -p 22 -i app_key_pair.pem -o StrictHostKeyChecking=no" --exclude-from='.rsyncignore' --delete $GITHUB_WORKSPACE/ ubuntu@$18.136.196.164:/var/www/html/
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          ssh-username: ubuntu
+          remote-port: 22
+          remote-host: 18.136.196.164
+          source: ./
+          destination: /var/www/html/
