@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Greeting Example</title>
+    <title>master.lk web page</title>
 </head>
 <body>
 
-<h1>Greeting Example By Charith Sathsara.</h1>
+<h1>Welcome to master.lk</h1>
 <p>
     <?php
     require_once 'Greeting.php';
 
     $greeting = new Greeting();
-    $str = $greeting->getGreeting("John");
+    $str = $greeting->getGreeting("Charith");
     echo "<p>" . $str . "</p>";
 
     ?>
