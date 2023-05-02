@@ -23,9 +23,10 @@ jobs:
         run: ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
 
       - name: Setup SSH connection to destination server through jump server
-        run: ssh -tt -o ProxyCommand="ssh -W %h:%p -i ${{ secrets.EC2_SSH_KEY }} ubuntu@43.205.199.65" ubuntu@172.20.3.120
+        run: ssh -tt -o ProxyCommand="ssh -W %h:%p -i ${{ secrets.APP_SSH_KEY }} ubuntu@43.205.199.65" ubuntu@172.20.3.120
 
       - name: Deploy code to destination server
         run: |
           ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
-          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@172.20.3.120:/var/www/html/
+          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
+          
