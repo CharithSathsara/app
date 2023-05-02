@@ -19,15 +19,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+      - name: Add jump server to known_hosts
+        run: ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
+
       - name: Setup SSH connection to destination server through jump server
         uses: webfactory/ssh-agent@v0.5.0
         with:
-          host: 172.20.3.120
-          username: ubuntu
-          port: 22
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          ssh-auth-sock: $SSH_AUTH_SOCK
+          ssh-options: '-o ProxyCommand="ssh -W %h:%p -i ${{ secrets.EC2_SSH_KEY }} ubuntu@43.205.199.65" ubuntu@172.20.3.120'
 
       - name: Deploy code to destination server
-        run: |
-          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
-          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
+        run: rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
