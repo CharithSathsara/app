@@ -14,4 +14,5 @@ jobs:
 
       - name: Deploy code via rsync
         run: |
+          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
           rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${{ secrets.EC2_SSH_KEY }}" ./ ubuntu@172.20.3.120:/var/www/html/
