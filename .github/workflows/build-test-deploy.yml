@@ -29,4 +29,5 @@ jobs:
 
       - name: Deploy code to destination server
         run: |
+          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
           rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
