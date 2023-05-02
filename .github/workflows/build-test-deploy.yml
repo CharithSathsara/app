@@ -30,4 +30,6 @@ jobs:
           ssh-options: '-o ProxyCommand="ssh -W %h:%p -i ${{ secrets.EC2_SSH_KEY }} ubuntu@43.205.199.65" ubuntu@172.20.3.120'
 
       - name: Deploy code to destination server
-        run: rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
+        run: |
+          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
+          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
