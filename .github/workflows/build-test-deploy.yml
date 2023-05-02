@@ -21,5 +21,6 @@ jobs:
 
       - name: Connect to private EC2 instance and deploy code
         run: |
+          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
           ssh -o ProxyJump=ubuntu@43.205.199.65 -i ${{ secrets.EC2_SSH_KEY }} ubuntu@172.20.3.120 "rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ /var/www/html/"
     
