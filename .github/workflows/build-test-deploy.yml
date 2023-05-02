@@ -29,4 +29,6 @@ jobs:
       - name: Deploy code to target server through tunnel
         run: |
           ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
+          echo "${{ secrets.APP_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
           rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
