@@ -25,12 +25,8 @@ jobs:
           host: 172.20.3.120
           username: ubuntu
           port: 22
-          ssh-private-key: ${{ secrets.APP_SSH_KEY }}
-          jump_host: ubuntu@43.205.199.65
-          jump_key: ${{ secrets.APP_SSH_KEY }}
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
       - name: Deploy code to destination server
         run: |
-          ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
-          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
           rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@localhost:/var/www/html/
