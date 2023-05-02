@@ -22,6 +22,7 @@ jobs:
       - name: Create SSH tunnel to target server through jump server
         run: |
           ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
+          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
           ssh -fNL 8080:172.20.3.120:22 ubuntu@43.205.199.65 -i <(echo "${{ secrets.APP_SSH_KEY }}")
 
       - name: Deploy code to target server through tunnel
