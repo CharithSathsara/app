@@ -14,12 +14,13 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Setup SSH connection
+      - name: Setup SSH connection to jump server
         uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Deploy code
+      - name: Connect to private EC2 instance and deploy code
         run: |
-          ssh-keyscan 3.1.8.35 >> ~/.ssh/known_hosts
-          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@3.1.8.35:/var/www/html/app/
+          ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
+          ssh -o ProxyJump=ubuntu@43.205.199.65 -i ${{ secrets.EC2_SSH_KEY }} ubuntu@172.20.3.120 "rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ /var/www/html/"
+    
