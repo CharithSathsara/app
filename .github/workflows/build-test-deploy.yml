@@ -24,7 +24,7 @@ jobs:
         with:
           host: 172.20.3.120
           username: ubuntu
-          port: 22
+          port: 80
           key: ${{ secrets.APP_SSH_KEY }}
           jump_host: ubuntu@43.205.199.65
           jump_key: ${{ secrets.APP_SSH_KEY }}
