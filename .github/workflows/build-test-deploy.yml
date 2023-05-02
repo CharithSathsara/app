@@ -19,8 +19,16 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Connect to private EC2 instance and deploy code
+      - name: Forward SSH port to EC2 instance
+        run: |
+          ssh -f -N -L 2222:172.20.3.120:22 ubuntu@43.205.199.65
+
+      - name: Setup SSH connection to EC2 instance
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Deploy code to EC2 instance
         run: |
           ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
-          ssh -o ProxyJump=ubuntu@43.205.199.65 -i ${{ secrets.EC2_SSH_KEY }} ubuntu@172.20.3.120 "rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@172.20.3.120:/var/www/html/"
-    
+          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2222' ./ ubuntu@localhost:/var/www/html/
