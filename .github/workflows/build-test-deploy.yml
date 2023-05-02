@@ -21,9 +21,9 @@ jobs:
 
       - name: Forward SSH port to EC2 instance
         run: |
-          ssh -o StrictHostKeyChecking=no -f -N -L 80:172.20.3.120:22 ubuntu@43.205.199.65
+          ssh -o StrictHostKeyChecking=no -f -N -L 2222:172.20.3.120:22 ubuntu@43.205.199.65
 
       - name: Deploy code to EC2 instance
         run: |
           ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
-          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 80' ./ ubuntu@localhost:/var/www/html/
+          rsync -avz --delete --no-perms --exclude-from='.rsyncignore' -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2222' ./ ubuntu@localhost:/var/www/html/
