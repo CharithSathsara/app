@@ -23,5 +23,5 @@ jobs:
         run: |
           ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
           ssh -A ubuntu@43.205.199.65 ssh ubuntu@172.20.3.120 \
-            "rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@$localhost:/var/www/html/"
+            "rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ ubuntu@$172.20.3.120:/var/www/html/"
           
