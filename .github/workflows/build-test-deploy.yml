@@ -11,18 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      steps:
-        - name: Checkout the files
-          uses: actions/checkout@v2
+      - name: Checkout the files
+        uses: actions/checkout@v2
 
-        - name: Setup SSH connection
-          uses: webfactory/ssh-agent@v0.5.0
-          with:
-            ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+      - name: Setup SSH connection
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-        - name: Deploy code
-          run: |
-            ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
-            ssh -A ubuntu@43.205.199.65 ssh ubuntu@172.20.3.120 \
-              "rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ /var/www/html/"
+      - name: Deploy code
+        run: |
+          ssh-keyscan 172.20.3.120 >> ~/.ssh/known_hosts
+          ssh -A ubuntu@43.205.199.65 ssh ubuntu@172.20.3.120 \
+            "rsync -avz --delete --no-perms --exclude-from='.rsyncignore' ./ /var/www/html/"
           
