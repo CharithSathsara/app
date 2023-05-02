@@ -5,17 +5,17 @@
 </head>
 <body>
 
-<h1>Welcome to master.lk E-Learning Systemd</h1>
-<p>
-    <?php
+<h1>Welcome to master.lk E-Learning System</h1>
+
+<?php
     require_once 'Greeting.php';
 
     $greeting = new Greeting();
     $str = $greeting->getGreeting("Charith Sathsara");
-    echo "<p>" . $str . "</p>";
+    echo "<p>". $str . "</p>";
+
 
     ?>
-</p>
 
 </body>
 </html>
