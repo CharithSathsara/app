@@ -26,5 +26,4 @@ jobs:
       - name: Deploy code to EC2 instance
         run: |
           ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
-          sudo rsync -avz --delete --no-perms --exclude-from='.rsyncignore' -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 80' ./ ubuntu@localhost:/var/www/html/
-
+          sudo rsync -avz --delete --no-perms --exclude-from='.rsyncignore' -e 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2222' ./ ubuntu@localhost:/var/www/html/
