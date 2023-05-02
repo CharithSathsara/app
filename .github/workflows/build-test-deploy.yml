@@ -23,11 +23,6 @@ jobs:
         run: |
           ssh -f -N -L 80:172.20.3.120:22 ubuntu@43.205.199.65
 
-      - name: Setup SSH connection to EC2 instance
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-
       - name: Deploy code to EC2 instance
         run: |
           ssh-keyscan 43.205.199.65 >> ~/.ssh/known_hosts
