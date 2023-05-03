@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>Welcome to master.lk E-Learning System</h1>
+<h1>Welcome to master.lk E-Learning System with two instances</h1>
 
 <?php
     require_once 'Greeting.php';
